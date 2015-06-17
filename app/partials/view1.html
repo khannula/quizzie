@@ -1,0 +1,43 @@
+
+<p><a ng-href="#/index">Takaisin etusivulle</a></p>
+
+<form ng-submit="submit()" ng-controller="QuizCtrl" class="ng-scope">
+
+    <ul class="questions">
+        <li ng-repeat="question in questions" class="thumbnail phone-listing">
+            <!--a href="#/questions/{{question.id}}">{{question.question}} </a-->
+            <h3>{{question.question}}</h3>
+            <ul class="toppings"> <!-- css tobe defined -->
+                <li ng-repeat="topping in question.toppings" class="thumbnail phone-listing">
+                    <!-- TODO: should be separate model for each questions so that redio selections stay visible -->
+                    <label>
+                        <input type="radio" ng-model="topping.id" name="type_{{question.id}}"  ng-change="checkAnswer(topping.type, question.answer)"  />
+                        {{topping.type}}
+
+                        <!--input type="radio" ng-model="$parent.type" name="type" value="{{topping.id}}" ng-change="checkAnswer(topping.type, question.answer)"  />
+                        {{topping.type}}-->
+                    </label>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+            <button ng-click="submit()" class="btn btn-primary btn-lg btn-block" role="button" ng-show="!showRes">Näytä tulos</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+            <h2 ng-show="showRes">
+                Sait {{nbrOfRightAnswers}} oikein!
+            </h2>
+            <button ng-click="clearForm()" class="btn btn-primary btn-lg btn-block" role="button" ng-show="showRes">Tyhjennä</button>
+        </div>
+    </div>
+
+</form>
+
+
